@@ -39,9 +39,14 @@ def reverseString(str: str) -> str:
 
 
 #Не проще ли так?) и читается легко и время выполнения не уступает
+#добавил счетчик работы кода
+import time
+started_at = time.time()
+
 s = 'ya ya  tpc     str          1    '
+y = s * 20000
 res = ''
-x = s.split(' ')
+x = y.split(' ')
 x.reverse()
 for t in x:
     if t == '':
@@ -50,3 +55,5 @@ for t in x:
         res += t
         res += ' '
 print(res)
+code_time = (ended_at - started_at)
+print(f'функция работала {code_time} секундочек')
