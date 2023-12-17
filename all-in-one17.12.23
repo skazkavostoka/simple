@@ -1,0 +1,28 @@
+#a few weeks ago i wanted to take a mini-course from stepik.org, python for advanced.
+#In module 2 i saw the asignment, where students must be to find certain symbols in a string. 
+# This symbols - anton, but i wanted to create a all-in-one solution, where we also enter the this symbols to be search
+#Несколько недель назад я решил пройти небольшой курс на stepik.org python для продвинутых. Ввиду длительного отсутствия практики при решении задач я сталкивался трудностями,
+# ввиду того, что многие стандартные методы и особенности питона подзабыл. Да и в целом грамотно поданный материал всегда приятен к усвоению
+# там была задача, где нужно было в подаваемых на вход программе строках найти символы строки "anton". Символы могли стоять не обязательно друг за другом,
+# но именно в этой последовательности
+#я решил написать универсальное решение не только для символов строки "anton" но и для символов любой строки, оно представлено ниже
+def func(sp, s, number):
+    counter = 0
+    schet = 0
+    for k in range(len(sp)):
+        for j in range(counter, len(s)):
+            if s[j] == sp[k]:
+                new_counter = s.index(s[j], counter)
+                counter = new_counter
+                schet += 1
+                break
+    if schet == len(sp):
+        print(number + 1)
+
+
+n = int(input())
+s = input()
+sp = [i for i in s]
+for i in range(n):
+    s = input()
+    func(sp,s, i)
