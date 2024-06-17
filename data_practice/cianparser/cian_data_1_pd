@@ -1,0 +1,47 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+from names import parse_location, current_date
+
+
+path = f'C:\\Users\\Артем\\PycharmProjects\\Tests\\Data science practice\\cian parse and forecasting\\{parse_location}_{current_date}.csv'
+
+data = pd.read_csv(path).sort_values(by='price')
+
+print(data.columns.tolist())
+data.dropna()
+
+# plt.figure(figsize=(10, 6))
+# plt.scatter(data['price'], data['total_meters'], c='blue', label='Цена', s=10)
+# plt.xlabel('м2')
+# plt.ylabel('Цена квартиры')
+# plt.title('Соотношение цены на количество квадратных метров')
+# plt.legend()
+# plt.grid(True)
+# plt.show()
+
+total_meters = 0
+total_price = 0
+for index, row in data.iterrows():
+    if row['price'] != 0 and row['total_meters'] != 0:
+        total_meters += row['total_meters']
+        total_price += row['price']
+
+print(f'Средняя цена квадратного метра {round(total_price/total_meters, 2)} руб.')
+
+
+district_mean_price = {}
+
+for index, row in data.iterrows():
+    if row['district'] in district_mean_price:
+        if row['price'] != 0 and row['total_meters'] != 0:
+            district_mean_price[row['district']][0] += row['price']
+            district_mean_price[row['district']][1] += row['total_meters']
+    else:
+        district_mean_price[row['district']] = [row['price'], row['total_meters']]
+
+maximum = 0
+for key, value in district_mean_price.items():
+    print(f'Цена за м2 в {key} = {value[0] / value[1]}')
+
+print(max(district_mean_price, key=lambda k: district_mean_price[k][0] / district_mean_price[k][1]))
