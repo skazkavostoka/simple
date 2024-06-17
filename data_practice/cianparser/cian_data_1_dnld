@@ -1,0 +1,20 @@
+import cianparser
+import pandas as pd
+from names import parse_location, current_date
+
+
+sevastopol = cianparser.CianParser(location=parse_location)
+settings = {
+    'start_page': 1,
+    'end_page': 10,
+    'min_balconies': 1,
+    'is_by_homeowner': True,
+    'max_price': 10000000,
+    'only_flat': True,
+    'sort_by': 'price_from_min_to_max'
+}
+sev_data = sevastopol.get_flats(deal_type='sale', rooms=(1, 2), with_saving_csv=False, additional_settings=settings)
+
+sev_pd = pd.DataFrame(sev_data)
+
+sev_pd.to_csv(f'{parse_location}_{current_date}.csv', index=False, encoding='utf-8-sig')
