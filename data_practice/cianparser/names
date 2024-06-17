@@ -1,0 +1,6 @@
+from datetime import datetime
+# this is help_file
+
+moment = datetime.now()
+current_date = moment.strftime('%Y-%m-%d')
+parse_location = 'Москва'
