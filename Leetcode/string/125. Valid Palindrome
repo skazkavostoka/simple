@@ -1,0 +1,12 @@
+class Solution(object):
+    def isPalindrome(self, s):
+        s = s.strip()
+        t = ''
+        for i in s:
+            if i in string.ascii_letters:
+                t += i.lower()
+        if t != t[::-1]:
+            return False
+        else:
+            return True
+            
