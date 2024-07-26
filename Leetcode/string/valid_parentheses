@@ -1,0 +1,38 @@
+import time
+  #изменняя числовое значение в 36 строке (параметр метода insert) видим что программа перестает работать сразу же как результат ее работы может вернуть False
+
+def isValid(s):
+    start_time = time.time()
+    flag = True
+    for elem in s:
+        if elem == '(':
+            if ')' in s:
+                s.replace('(', '')
+                s.replace(')', '')
+            else:
+                flag = False
+                break
+        if elem == '{':
+            if '}' in s:
+                s.replace('{', '')
+                s.replace('}', '')
+            else:
+                flag = False
+                break
+        if elem == '[':
+            if ']' in s:
+                s.replace('[', '')
+                s.replace(']', '')
+            else:
+                flag = False
+                break
+    end_time = time.time()
+    print(end_time - start_time)
+    return flag
+
+
+
+spisok_2 = ['[]' for i in range(10000)]
+spisok_2.insert(5000, '{')
+train = isValid(''.join(spisok_2))
+print(train)
