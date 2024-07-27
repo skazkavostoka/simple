@@ -1,0 +1,10 @@
+#10 ms
+
+class Solution(object):
+    def convertToTitle(self, columnNumber):
+        let = ''
+        while columnNumber != 0:
+            columnNumber -= 1
+            let += string.ascii_uppercase[columnNumber % 26]
+            columnNumber //= 26
+        return let[::-1] 
