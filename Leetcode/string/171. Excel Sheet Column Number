@@ -1,0 +1,9 @@
+# 10 ms
+
+class Solution(object):
+    def titleToNumber(self, columnTitle):
+        sum = 0
+        columnTitle = columnTitle[::-1]
+        for i in range(len(columnTitle)):
+            sum += (string.ascii_uppercase.index(columnTitle[i]) + 1) * 26**(i)
+        return sum
