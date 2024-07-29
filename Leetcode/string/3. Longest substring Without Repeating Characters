@@ -1,0 +1,14 @@
+# 36ms the best score...wow...
+
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        start = 0
+        symbols = set()
+        max_s = 0
+        for end in range(len(s)):
+            while s[end] in symbols:
+                symbols.remove(s[start])
+                start += 1
+            symbols.add(s[end])
+            max_s = max(max_s, end-start+1)
+        return max_s
