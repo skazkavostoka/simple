@@ -1,0 +1,19 @@
+#first solution, very bad...
+
+class Solution(object):
+    def isIsomorphic(self, s, t):
+        if len(s) != len(t):
+            return False
+        s_to_t, t_to_s = {s[i]: t[i] for i in range(len(s))}, {t[i]: s[i] for i in range(len(s))}
+        for i in s:
+            if i != t_to_s[s_to_t[i]]:
+                return False
+        empty = ''
+        for i in t:
+            if i != s_to_t[t_to_s[i]]:
+                return False
+            else:
+                empty += t_to_s[i]
+        if empty != s:
+            return False
+        return True
