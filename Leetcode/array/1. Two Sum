@@ -1,0 +1,24 @@
+# Junior Solution... 2135 ms...
+
+class Solution(object):
+    def twoSum(self, nums, target):
+        for i in range(len(nums)-1):
+            for k in range(i+1, len(nums)):
+                if nums[i] + nums[k] == target:
+                    return [i, k]
+
+
+
+
+# Middle Solution...31 ms...the most fast
+
+class Solution(object):
+    def twoSum(self, nums, target):
+        result_dict = {}
+        for i in range(len(nums)):
+            second_num = target - nums[i]
+            if second_num in result_dict:
+                t = [result_dict[second_num], i]
+                return t
+            else:
+                result_dict[nums[i]] = i
