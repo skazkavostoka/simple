@@ -1,0 +1,5 @@
+SELECT product_id
+from Products p
+WHERE p.low_fats LIKE 'Y' AND p.recyclable LIKE 'Y'
+
+https://leetcode.com/problems/recyclable-and-low-fat-products
