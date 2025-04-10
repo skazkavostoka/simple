@@ -50,5 +50,20 @@ GROUP BY v.customer_id
 
 
 9
+SELECT w1.id
+FROM Weather w1
+JOIN Weather w2 ON w1.recordDate = w2.recordDate+1
+WHERE w2.temperature < w1.temperature
+
+
+10
+SELECT starts.machine_id, ROUND(AVG(ends.end_timestamp - starts.start_timestamp)::NUMERIC, 3) as processing_time
+FROM (SELECT machine_id, process_id, timestamp AS start_timestamp FROM Activity WHERE activity_type = 'start') AS starts
+JOIN (SELECT machine_id, process_id, timestamp AS end_timestamp FROM Activity WHERE activity_type = 'end') AS ends
+ON starts.machine_id = ends.machine_id AND starts.process_id = ends.process_id
+GROUP BY 1
+
+
+11
 
 
