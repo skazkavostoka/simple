@@ -113,3 +113,41 @@ GROUP BY s.user_id
 ORDER BY s.user_id;
 
 
+15
+SELECT id, movie, c.description, rating
+FROM Cinema c
+WHERE id % 2 = 1 AND c.description <> 'boring'
+ORDER BY rating DESC
+
+
+16
+SELECT 
+  p.product_id, 
+  COALESCE(ROUND(
+    COALESCE(SUM(p.price * u.units), 0) * 1.0 / NULLIF(SUM(u.units), 0), 
+    2
+  ), 0) AS average_price
+FROM Prices p
+LEFT JOIN UnitsSold u 
+  ON u.product_id = p.product_id
+  AND u.purchase_date BETWEEN p.start_date AND p.end_date
+GROUP BY p.product_id;
+
+
+17 (1075)
+SELECT project_id, ROUND(SUM(e.experience_years) * 1.0 / COUNT(e.employee_id), 2) as average_years
+FROM Project p
+JOIN Employee e ON p.employee_id = e.employee_id
+GROUP BY project_id
+ORDER BY project_id ASC
+
+
+18
+SELECT r.contest_id, ROUND( COUNT(DISTINCT r.user_id) * 100.0 / (SELECT COUNT(*) FROM Users), 2) as percentage
+FROM Register r
+GROUP BY r.contest_id
+ORDER BY percentage DESC, r.contest_id ASC
+
+
+19
+
